@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae - Rachel A</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --accent-orange: #ff7b00;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Container untuk Gambar CV */
+        .cv-wrapper {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .cv-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .btn-orange {
+            background-color: var(--accent-orange);
+            color: white;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .btn-orange:hover {
+            background-color: #e66e00;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hilangkan elemen navigasi saat download/print */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: none; }
+            .cv-wrapper { border: none; box-shadow: none; margin: 0; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="container d-flex justify-content-between align-items-center py-4 no-print">
+        <a href="RacArchive.html" class="btn btn-outline-light rounded-pill px-4">
+            <i class="fas fa-arrow-left me-2"></i> Back</a></nav>
+
+    <main class="container mb-5">
+        <div class="cv-wrapper">
+            <img src="cv2.jpg" alt="Curriculum Vitae Rachel Aulia" class="cv-image">
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
