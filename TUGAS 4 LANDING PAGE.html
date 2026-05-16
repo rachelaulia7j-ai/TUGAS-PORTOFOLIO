@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile - Amwal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- Base & Variables --- */
+        :root {
+            --dark-blue: #0b2545;
+            --brand-orange: #f39c12;
+            --text-muted: #777;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            overflow-x: hidden;
+        }
+
+        /* --- Header & Top Bar --- */
+        .top-bar {
+            background-color: #111;
+            color: #ccc;
+            font-size: 13px;
+            padding: 8px 0;
+        }
+
+        .top-bar i { 
+            color: var(--brand-orange); 
+            margin-right: 8px; 
+        }
+
+        .top-bar a { 
+            color: #ccc; 
+            text-decoration: none; 
+        }
+
+        .social-icons a { 
+            margin-left: 15px; 
+            color: #ccc; 
+        }
+
+        .navbar {
+            padding: 15px 0;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .navbar-brand img { 
+            height: 40px; 
+        }
+
+        .nav-link {
+            color: #333 !important;
+            font-weight: 600;
+            text-transform: capitalize;
+            margin: 0 5px;
+        }
+
+        .nav-link.active { 
+            color: var(--brand-orange) !important; 
+            border-bottom: 2px solid var(--brand-orange); 
+        }
+        
+        .btn-cart { 
+            background: var(--brand-orange); 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+        }
+
+        .btn-search { 
+            background: #002e5b; 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(11, 37, 69, 0.85);
+            z-index: 1;
+        }
+
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+        }
+
+        .hero-content h1 { 
+            font-size: 64px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+        }
+        
+        .custom-breadcrumb {
+            display: flex; 
+            justify-content: center; 
+            list-style: none; 
+            padding: 0;
+            font-size: 13px; 
+            text-transform: uppercase; 
+            font-weight: 600;
+        }
+
+        .custom-breadcrumb li i { 
+            color: var(--brand-orange); 
+            margin-right: 8px; 
+        }
+
+        .custom-breadcrumb li:not(:last-child)::after { 
+            content: '>'; 
+            margin: 0 10px; 
+            color: #ccc; 
+        }
+
+        .custom-breadcrumb li a { 
+            color: white; 
+            text-decoration: none; 
+        }
+
+        .custom-breadcrumb li.active { 
+            color: #bdc3c7; 
+        }
+
+        /* --- About Us --- */
+        .about-section { 
+            padding: 80px 0; 
+        }
+
+        .image-stack { 
+            position: relative; 
+            margin-bottom: 50px; 
+        }
+
+        .img-top { 
+            width: 85%; 
+            border: 8px solid #fff; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+
+        .img-bottom { 
+            width: 85%; 
+            margin-top: -100px; 
+            margin-left: auto; 
+            border: 8px solid #fff; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+
+        .blue-box {
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            background-color: var(--dark-blue); 
+            color: white; 
+            padding: 40px 30px;
+            text-align: center; 
+            width: 220px; 
+            z-index: 10; 
+            border: 5px solid #fff;
+        }
+
+        .main-title span { 
+            color: var(--brand-orange); 
+            font-weight: bold; 
+        }
+
+        .description { 
+            color: var(--text-muted); 
+            font-size: 14px; 
+            line-height: 1.8; 
+        }
+
+        /* --- Stats Bar --- */
+        .stats-bar { 
+            background: var(--dark-blue); 
+            color: white; 
+            padding: 60px 0; 
+        }
+
+        .stat-item i { 
+            font-size: 2.5rem; 
+            color: var(--brand-orange); 
+            margin-bottom: 15px; 
+        }
+
+        /* --- Why Choose Us --- */
+        :root {
+            --brand-orange: #f39c12;
+            --text-muted: #777;
+            --bg-light: #f9f9f9;
+        }
+
+        .why-choose-section {
+            padding: 80px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        /* Header Section */
+        .section-header {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-weight: 700;
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Garis oranye di atas judul */
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background-color: var(--brand-orange);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Grid Ikon */
+        .feature-item {
+            margin-bottom: 40px;
+            transition: 0.3s;
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: var(--brand-orange);
+            transition: 0.3s;
+        }
+
+        /* Efek Highlight (Warna penuh pada ikon Experienced) */
+        .feature-item.highlight .icon-box {
+            background-color: var(--brand-orange);
+            color: #fff;
+            border-color: var(--brand-orange);
+        }
+
+        .feature-item h5 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        /* Logo Partners Section */
+        .partners-section {
+            padding: 40px 0;
+            background-color: var(--bg-light);
+            border-top: 1px solid #eee;
+        }
+
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            max-width: 140px;
+            transition: 0.3s;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* --- Newsletter --- */
+        .newsletter-section {
+            background-color: var(--dark-blue);
+            background-image: linear-gradient(rgba(11, 37, 69, 0.9), rgba(11, 37, 69, 0.9)), url('kantor1.jpg');
+            padding: 60px 0; 
+            color: white;
+        }
+
+        .newsletter-text .highlight { 
+            color: #f39c12; 
+        }
+
+        .newsletter-form input {
+            background: transparent; 
+            border: none; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0; 
+            color: white; 
+            padding: 10px 40px 10px 0; 
+            width: 100%;
+        }
+
+        .newsletter-form input:focus { 
+            outline: none; 
+            border-bottom: 1px solid #f39c12; 
+        }
+
+        .btn-submit { 
+            position: absolute; 
+            right: 0; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: none; 
+            border: none; 
+            color: #f39c12; 
+            font-size: 18px; 
+        }
+
+        /* --- Footer --- */
+        .main-footer {
+            background-color: #111111;
+            padding: 80px 0 0 0;
+            color: #888;
+        }
+
+        .footer-header {
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .footer-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: #f39c12;
+        }
+
+        .footer-desc { 
+            font-size: 14px; 
+            line-height: 1.8; 
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            background: #222;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover { 
+            background: #f39c12; 
+        }
+
+        .contact-info li, .menu-links li {
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i { 
+            margin-right: 12px; 
+            margin-top: 4px; 
+        }
+
+        .menu-links a { 
+            color: #888; 
+            text-decoration: none; 
+            transition: 0.3s; 
+        }
+
+        .menu-links a:hover { 
+            color: #f39c12; 
+            padding-left: 5px; 
+        }
+
+        .footer-map {
+            filter: invert(0.6);
+            opacity: 0.4;
+        }
+
+        /* Styling Copyright di dalam footer */
+        .copyright-section {
+            background-color: #111111;
+            padding: 25px 0;
+        }
+
+        .bottom-menu a {
+            color: #888;
+            text-decoration: none;
+            font-size: 13px;
+            margin-right: 15px;
+        }
+
+        .bottom-menu a:hover { 
+            color: white; 
+        }
+        
+        /* --- Responsive --- */
+        @media (max-width: 991px) {
+            .hero-content h1 { font-size: 42px; }
+            .img-bottom { margin-top: -50px; }
+            .blue-box { width: 180px; padding: 20px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar d-none d-lg-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-9">
+                    <span class="me-4"><i class="fas fa-map-marker-alt"></i> 325 admiral unit, North coast, USA</span>
+                    <span class="me-4"><i class="fas fa-envelope"></i> admin@amwal.com</span>
+                    <span><i class="fas fa-phone"></i> 01 0100 843</span>
+                </div>
+                <div class="col-md-3 text-end social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+                <img src="Lgo1.jpg" alt="Logo" class="me-2"> AMWAL
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Company</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Cases</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Pages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn-cart me-1"><i class="fas fa-shopping-cart"></i></button>
+                    <button class="btn-search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <p class="text-uppercase ls-2">Company Profile</p>
+            <h1>About Us</h1>
+            <ul class="custom-breadcrumb">
+                <li><a href="#"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="#">COMPANY</a></li>
+                <li class="active ps-2">ABOUT US</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="about-section container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="image-stack">
+                    <div class="blue-box">
+                        <h3>Today,<br>Tomorrow,<br>Together.</h3>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" class="img-top d-block" alt="Meeting">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80" class="img-bottom d-block" alt="Teamwork">
+                </div>
+            </div>
+            <div class="col-lg-6 ps-lg-5">
+                <h2 class="main-title mb-4">Let <span>tomorrow</span> begin <span>today.</span></h2>
+                <p class="description mb-4">Temporibus autem quibusdam et aut officiis debitis is aut rerum necessitatibus saepes eveniet ut eles seo lage voluptates repudiandae sint et molestiae non mes.</p>
+                <div class="mb-3">
+                    <h5 class="fw-bold">Our Mission</h5>
+                    <p class="text-muted small">Lorem Ipsum dolor sit, consectet adipisi elit, sed do eiusmod tempor minim veniam.</p>
+                </div>
+                <div class="mb-3">
+                    <h5 class="fw-bold">Our Vision</h5>
+                    <p class="text-muted small">Lorem Ipsum dolor sit, consectet adipisi elit, sed do eiusmod tempor minim veniam.</p>
+                </div>
+                <div>
+                    <h5 class="fw-bold">Our Strategy</h5>
+                    <p class="text-muted small">Lorem Ipsum dolor sit, consectet adipisi elit, sed do eiusmod tempor minim veniam.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-bar text-center">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-6 col-md-3 stat-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h2 class="fw-bold">460</h2>
+                    <p class="mb-0">Cases completed</p>
+                </div>
+                <div class="col-6 col-md-3 stat-item">
+                    <i class="fas fa-users"></i>
+                    <h2 class="fw-bold">29</h2>
+                    <p class="mb-0">Consultants</p>
+                </div>
+                <div class="col-6 col-md-3 stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <h2 class="fw-bold">18</h2>
+                    <p class="mb-0">Awards winning</p>
+                </div>
+                <div class="col-6 col-md-3 stat-item">
+                    <i class="fas fa-university"></i>
+                    <h2 class="fw-bold">50</h2>
+                    <p class="mb-0">Years of Experiences</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why to choose us</h2>
+                <p>As always, partners grows with you!</p>
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-md-3 feature-item">
+                    <div class="icon-box"><i class="fas fa-trophy"></i></div>
+                    <h5>Professional</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+                
+                <div class="col-6 col-md-3 feature-item highlight">
+                    <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+                    <h5>Experienced</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+
+                <div class="col-6 col-md-3 feature-item">
+                    <div class="icon-box"><i class="fas fa-university"></i></div>
+                    <h5>Vibrant</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+
+                <div class="col-6 col-md-3 feature-item">
+                    <div class="icon-box"><i class="fas fa-user-tie"></i></div>
+                    <h5>Personality</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-md-3 feature-item">
+                    <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                    <h5>Energy</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+
+                <div class="col-6 col-md-3 feature-item">
+                    <div class="icon-box"><i class="fas fa-key"></i></div>
+                    <h5>Honesty</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+
+                <div class="col-6 col-md-3 feature-item">
+                    <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                    <h5>Experts</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+
+                <div class="col-6 col-md-3 feature-item">
+                    <div class="icon-box"><i class="fas fa-rocket"></i></div>
+                    <h5>Quality</h5>
+                    <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim adesg ens minim veniam.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-section">
+        <div class="container">
+            <div class="row g-4 justify-content-center align-items-center">
+                <div class="col-6 col-md-4 col-lg-2 text-center">
+                    <img src="g4.jpg" alt="Hexagon" class="img-fluid" style="max-height: 100px;">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center">
+                    <img src="g1.jpg" alt="Hexagon" class="img-fluid" style="max-height: 100px;">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center">
+                    <img src="g3.jpg" alt="Hexagon" class="img-fluid" style="max-height: 100px;">
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center">
+                    <img src="g2.jpg" alt="Hexagon" class="img-fluid" style="max-height: 100px;">
+                </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5">
+                    <div class="newsletter-text">
+                        <h4>Newsletter for recieve</h4>
+                        <h2>our <span class="highlight">latest company</span> updates</h2>
+                    </div>
+                </div>
+                <div class="col-md-6 offset-md-1">
+                    <form class="newsletter-form position-relative">
+                        <input type="email" placeholder="Your E-mail Address" required>
+                        <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-header">About Amwal</h5>
+                    <p class="footer-desc">The lysine contingency - It's intended to prevent the spread of the animals is case they ever got off the island. Dr. Wu inserted a gene that makes.</p>
+                    <div class="social-links d-flex gap-2 mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-header">Head Office</h5>
+                    <ul class="list-unstyled contact-info">
+                        <li><i class="fas fa-map-marker-alt text-warning"></i> 1422 Aqua blue Road St. Santa Rosa, CA, USA</li>
+                        <li><i class="fas fa-envelope text-warning"></i> admin@amwal.com</li>
+                        <li><i class="fas fa-headphones text-warning"></i> support@amwal.com</li>
+                        <li><i class="fas fa-phone text-warning"></i> 002- 01008431112</li>
+                        <li><i class="fas fa-fax text-warning"></i> 002- 01008431112</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-header">Company Links</h5>
+                    <ul class="list-unstyled menu-links">
+                        <li><a href="#">Our History</a></li>
+                        <li><a href="#">Mission & Vision</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#" class="text-warning">Partners</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-header">Our Branches</h5>
+                    <div class="map-box text-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" alt="Map" class="img-fluid footer-map">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright-section mt-5">
+            <div class="container">
+                <hr style="border-color: rgba(255,255,255,0.1);"> 
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <ul class="list-inline mb-0 text-center text-md-start bottom-menu">
+                            <li class="list-inline-item"><a href="#">Home</a></li>
+                            <li class="list-inline-item"><a href="#">About Us</a></li>
+                            <li class="list-inline-item"><a href="#">Services</a></li>
+                            <li class="list-inline-item"><a href="#">Our Advisors</a></li>
+                            <li class="list-inline-item"><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                        <p class="mb-0 text-secondary" style="font-size: 13px;">
+                            © 2016 Amwal - Powered By <span class="text-light">Mohamed Arafa</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+       
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPals - Get Your New Furry Family Member</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+  <style>
+    /* 1. Variabel Warna */
+:root {
+    --purple-main: #7b52ab;
+    --purple-light: #f3f0f8;
+    --text-dark: #333333;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+}
+
+/* Utilities */
+.text-purple { color: var(--purple-main); }
+.bg-light-soft { background-color: #fcfcfc; }
+
+.btn-purple {
+    background-color: var(--purple-main);
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-purple:hover {
+    background-color: #62408b;
+    color: white;
+}
+
+.btn-outline-purple {
+    border: 2px solid var(--purple-main);
+    color: var(--purple-main);
+    font-weight: 600;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #ffffff 60%, #efebf7 100%);
+}
+
+.hero-img-container img {
+    max-width: 90%;
+    border-bottom-left-radius: 150px; /* Memberikan efek lengkung seperti di gambar */
+}
+
+/* Category Cards */
+.category-card {
+    background-color: var(--purple-light);
+    border-radius: 15px;
+    border: none;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.pet-img {
+    max-height: 250px;
+    object-fit: contain;
+}
+
+.pet-img-sm {
+    max-height: 120px;
+    object-fit: contain;
+}
+
+/* Responsivitas */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 40px 0;
+        text-align: center;
+    }
+    .hero-section .d-flex {
+        justify-content: center;
+    }
+}
+
+/* 2. Styling Khusus Section About */
+.about-section {
+    background-color: #ffffff;
+    padding: 100px 0;
+}
+
+.text-navy {
+    color: #0a1d37;
+    line-height: 1.2;
+}
+
+.text-purple {
+    color: #7b52ab;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+/* Mengatur tampilan gambar agar mirip dengan referensi */
+.pet-duo-img {
+    max-width: 70%;
+    height: auto;
+    /* Memberikan sedikit filter agar terlihat menyatu dengan background putih */
+    mix-blend-mode: multiply; 
+}
+
+.image-wrapper {
+    position: relative;
+    padding: 20px;
+}
+
+/* Dekorasi halus di belakang gambar (Opsional) */
+.image-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: #f3f0f8;
+    border-radius: 50%;
+    z-index: -1;
+    top: 10%;
+    left: 10%;
+    filter: blur(50px);
+    opacity: 0.6;
+}
+
+.explanation-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* Responsivitas Mobile */
+@media (max-width: 991px) {
+    .about-section {
+        padding: 60px 0;
+        text-align: center;
+    }
+    .text-start {
+        text-align: center !important;
+    }
+    .explanation-text {
+        text-align: justify;
+    }
+    .d-flex {
+        justify-content: center;
+    }
+}
+
+/* 3.Warna Tambahan */
+.text-navy {
+    color: #0a1d37;
+}
+
+.bg-banner {
+    background-color: #f8f9fb; /* Warna putih keabu-abuan lembut */
+    border: 1px solid #f0f0f0;
+}
+
+/* Badge Anjing Kecil di Judul */
+.badge-dog {
+    background-color: #0a1d37;
+    width: 60px;
+    height: 35px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.img-mini {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tombol Read More */
+.btn-outline-custom {
+    border: 1.5px solid #d1d1d1;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-custom:hover {
+    background-color: #7b52ab;
+    color: white;
+    border-color: #7b52ab;
+}
+
+/* Gambar Anjing Utama */
+.img-beagle {
+    max-height: 400px;
+    transform: translateY(20px); /* Membuatnya seolah menyentuh dasar container */
+}
+
+.mw-400 {
+    max-width: 400px;
+}
+
+.z-index-1 {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsivitas untuk Mobile */
+@media (max-width: 991px) {
+    .bg-banner {
+        text-align: center;
+        padding: 3rem 1.5rem !important;
+    }
+    .mw-400 {
+        max-width: 100%;
+        margin-inline: auto;
+    }
+    .img-beagle {
+        margin-top: 30px;
+        transform: translateY(0);
+    }
+    .badge-dog {
+        display: inline-flex;
+    }
+}
+
+/* 4.Custom Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #4a4a4a;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Card Styling */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.product-img-container {
+    height: 200px;
+    overflow: hidden;
+    padding: 15px;
+}
+
+.product-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Menjaga proporsi gambar produk seperti referensi */
+}
+
+.product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 0.95rem;
+    color: #d4a373 !important; /* Warna earth tone sesuai gambar */
+}
+
+/* Button Styling */
+.btn-custom {
+    background-color: #f0d1b6; /* Warna soft peach sesuai referensi */
+    border: none;
+    color: #5d4037;
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #e6b89c;
+    color: #3e2723;
+}
+
+.btn-outline-custom {
+    border: 1px solid #f0d1b6;
+    background-color: transparent;
+    color: #8d6e63;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+}
+
+.btn-outline-custom:hover {
+    background-color: #fdf5ef;
+    border-color: #e6b89c;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .product-name {
+        font-size: 0.9rem;
+    }
+    .product-img-container {
+        height: 150px;
+    }
+}
+
+/* 4. ulasan*/
+body {
+    background-color: #fcfaff; /* Warna background ungu sangat muda sesuai gambar */
+    font-family: 'Poppins', sans-serif;
+}
+
+.testimonial-section {
+    overflow: hidden; /* Mencegah scroll horizontal saat animasi jalan */
+}
+
+.testimonial-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(123, 82, 171, 0.05); /* Shadow ungu tipis */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animasi Hover Kartu */
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(123, 82, 171, 0.12);
+    border-color: #7b52ab;
+}
+
+.testimonial-text {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #eee;
+}
+
+.stars i {
+    font-size: 0.8rem;
+    margin-right: 2px;
+}
+
+/* Efek khusus untuk judul */
+h2 {
+    color: #2d1a47;
+    letter-spacing: -0.5px;
+}
+
+.social-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #ffffff;
+        color: #7b52ab;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(123, 82, 171, 0.1);
+    }
+
+    .social-icon:hover {
+        background-color: #7b52ab;
+        color: #ffffff;
+        transform: translateY(-3px);
+    }
+
+    .footer-link:hover {
+        color: #7b52ab !important;
+        padding-left: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .text-navy {
+        color: #0a1d37 !important;
+    }
+  </style>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-purple" href="#">
+                <i class="fas fa-paw"></i> PetPals
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#riview">Riview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="text-dark me-3"><i class="fas fa-search"></i></a>
+                    <a href="#" class="btn btn-outline-purple rounded-pill px-4">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="display-4 fw-bold mb-4"> <span class="text-dark">Love Your Pet, Trust Our Care</span></h1>
+                    <p class="text-muted mb-4">Perlengkapan Lengkap, dan Perawatan Penuh Kasih!</p>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-purple rounded-pill px-4 py-2 me-3">Shop Now</button>
+                        <a href="#" class="text-decoration-none text-dark fw-600">
+                            <i class="fas fa-phone-alt me-2"></i> Schedule a call
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center position-relative">
+                    <div class="hero-img-container">
+                        <img src="hewan1.png" alt="Dog with sunglasses" class="img-fluid rounded-circle-custom">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="about-section py-5" id="about">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 text-center" data-aos="fade-right">
+                <div class="image-wrapper">
+                    <img src="hewan2.jpg" 
+                         alt="Pet Friends" class="img-fluid pet-duo-img">
+                </div>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="ps-lg-4">
+                    <h5 class="text-muted fw-normal mb-2">Tentang Kami</h5>
+                    <h2 class="display-5 fw-bold text-navy mb-4">Mengapa Memilih <br> Produk Kami?</h2>
+                    
+                    <div class="explanation-text">
+                        <p class="lead text-purple fw-600 mb-3">Kualitas Terbaik untuk Anggota Keluarga Berbulu Anda.</p>
+                        
+                        <p class="text-muted mb-4">
+                            Kami memahami bahwa hewan peliharaan bukan sekadar peliharaan, melainkan bagian dari keluarga. Oleh karena itu, setiap produk yang kami sediakan telah melalui proses kurasi ketat untuk memastikan keamanan dan kenyamanan maksimal.
+                        </p>
+                        
+                        <p class="text-muted mb-4">
+                            Mulai dari nutrisi premium hingga perlengkapan harian, kami menjamin bahwa semua barang bersumber dari produsen terpercaya. Tim kami terdiri dari para pecinta hewan yang siap membantu Anda memberikan yang terbaik bagi kucing maupun anjing kesayangan Anda.
+                        </p>
+
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-purple me-2"></i>
+                                    <span class="fw-bold">Bahan Organik</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-purple me-2"></i>
+                                    <span class="fw-bold">Pengiriman Cepat</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-4">
+                    <h2 class="fw-bold mb-0">85+</h2>
+                    <p class="text-muted small">Breed</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h2 class="fw-bold mb-0">96K</h2>
+                    <p class="text-muted small">Clients</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h2 class="fw-bold mb-0">60+</h2>
+                    <p class="text-muted small">Employees</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h2 class="fw-bold mb-0">99%</h2>
+                    <p class="text-muted small">Protection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light" id="shop">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 section-title">Produk Unggulan</h2>
+            <p class="text-muted">Pilihan terbaik untuk kesehatan dan kenyamanan peliharaan Anda</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="pakanku.jpg" class="card-img-top" alt="Pakan Kucing">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Premium Cat Food</h5>
+                        <p class="product-price text-primary fw-bold">Rp 85.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="mainan.jpg" class="card-img-top" alt="Mainan Anjing">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Dog Chew Toy</h5>
+                        <p class="product-price text-primary fw-bold">Rp 45.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="kandang.jpg" class="card-img-top" alt="Kandang Burung">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Bird Cage Luxury</h5>
+                        <p class="product-price text-primary fw-bold">Rp 350.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="shampo.jpg" class="card-img-top" alt="Shampoo Hewan">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Organic Pet Shampoo</h5>
+                        <p class="product-price text-primary fw-bold">Rp 65.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="vit1.jpg" class="card-img-top" alt="Shampoo Hewan">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Supplement Cat</h5>
+                        <p class="product-price text-primary fw-bold">Rp 53.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="vit2.jpg" class="card-img-top" alt="Shampoo Hewan">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Supplement Dog</h5>
+                        <p class="product-price text-primary fw-bold">Rp 82.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="pakan2.jpg" class="card-img-top" alt="Shampoo Hewan">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Premium Dog Food</h5>
+                        <p class="product-price text-primary fw-bold">Rp 122.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                    <div class="product-img-container">
+                        <img src="bajuanjing.jpg" class="card-img-top" alt="Shampoo Hewan">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="product-name">Dog Clothes</h5>
+                        <p class="product-price text-primary fw-bold">Rp 180.000</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-custom w-100 mb-2">Detail</button>
+                            <button class="btn btn-custom w-100">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="banner-section py-5" id="services">
+    <div class="container bg-banner rounded-5 p-5 position-relative overflow-hidden">
+        <div class="row align-items-center">
+            <div class="col-lg-6 z-index-1">
+                <div class="d-flex align-items-center mb-3">
+                    <h2 class="fw-bold text-navy mb-0">Learn Together</h2>
+                    <div class="badge-dog mx-3">
+                        <img src="hewan2.jpg" alt="Small Dog" class="img-mini">
+                    </div>
+                </div>
+                <h2 class="fw-bold text-navy mb-4 display-6">Understand Your Pet, Fill Their Joy</h2>
+                <p class="text-muted mb-5 mw-400">
+                    Setiap hewan memiliki cara unik untuk berkomunikasi dan merasa nyaman. Dengan memahami perilaku serta kebutuhan mereka, kita bisa memberikan perawatan dan kasih sayang yang tepat. Ketika keinginan mereka terpenuhi, mereka akan merasa dicintai, aman, dan hidup dengan penuh kebahagiaan.
+                </p>
+                <a href="#" class="btn btn-outline-custom rounded-pill px-5 py-2">Baca Selengkapnya</a>
+            </div>
+
+            <div class="col-lg-6 text-end position-relative">
+                <img src="hewan3.jpg" alt="Beagle Dog" class="img-fluid img-beagle">
+                
+                <div class="paw-decoration top-0 start-50 opacity-25">
+                    <i class="fas fa-paw fa-3x text-light"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-section py-5" id="riview">
+        <div class="container text-center">
+            <div data-aos="fade-up">
+                <h2 class="fw-bold text-dark mb-3">Apa Kata Pelanggan?</h2>
+                <p class="text-muted mx-auto mb-5" style="max-width: 600px;">
+                    Temukan mengapa para pelanggan lama begitu antusias dengan Petpals yang telah merevolusi cara mereka merawat hewan kesayangan, sehingga membuat hidup mereka jauh bahagia
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="stars mb-3 text-start">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text text-start mb-4">
+                            "Petpals emang juara! Saya suka banget karena barangnya selalu ready stok dan kualitasnya terjamin. Layanan grooming-nya juga profesional, hewan saya jadi makin sehat dan wangi. Bener-bener toko hewan yang bikin hidup pemiliknya jadi lebih ringan dan bahagia."
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://i.pravatar.cc/150?u=shayna" alt="Shayna" class="avatar me-3">
+                            <div class="text-start">
+                                <h6 class="mb-0 fw-bold">Budi Santoso</h6>
+                                <small class="text-muted">Careative Inc.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="stars mb-3 text-start">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text text-start mb-4">
+                            "Sudah lama jadi langganan di Petpals dan nggak pernah kecewa! Mereka benar-benar mengubah cara saya merawat kucing. Mulai dari makanan, vitamin, sampai layanan grooming ada semua di sini. Sekarang urus hewan peliharaan jadi jauh lebih mudah dan nggak ribet. Recommended banget!"
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://i.pravatar.cc/150?u=mark" alt="Mark" class="avatar me-3">
+                            <div class="text-start">
+                                <h6 class="mb-0 fw-bold">Sarah A</h6>
+                                <small class="text-muted">Careative Inc.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="stars mb-3 text-start">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text text-start mb-4">
+                            "Kenapa saya dan banyak orang lain begitu antusias sama Petpals? Karena mereka paham betul kebutuhan hewan peliharaan! Harganya bersahabat, tapi pelayanannya kelas atas. Sekarang belanja kebutuhan hewan jadi hal yang menyenangkan, bukan beban. Terima kasih Petpals!"
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://i.pravatar.cc/150?u=william" alt="William" class="avatar me-3">
+                            <div class="text-start">
+                                <h6 class="mb-0 fw-bold">William Joe</h6>
+                                <small class="text-muted">Careative Inc.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section py-5" style="background-color: #ffffff;" id="contact">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-navy mb-3">Hubungi Kami</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">
+                Punya pertanyaan mengenai adopsi atau produk kami? Tim PetPals siap membantu Anda dan hewan kesayangan Anda.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm p-4 h-100" style="border-radius: 16px; background-color: #f3f0f8;">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="btn-purple rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; flex-shrink: 0;">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-0">Lokasi Kami</h6>
+                            <small class="text-muted">Jl. Anabul No. 123, Jakarta</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="btn-purple rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; flex-shrink: 0;">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-0">Telepon</h6>
+                            <small class="text-muted">+62 812 3456 7890</small>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="btn-purple rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; flex-shrink: 0;">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-0">Email</h6>
+                            <small class="text-muted">hello@petpals.com</small>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto p-3 bg-white rounded-3 shadow-sm">
+                        <h6 class="fw-bold text-purple mb-1"><i class="far fa-clock me-2"></i>Jam Operasional</h6>
+                        <p class="small text-muted mb-0">Senin - Minggu: 09:00 - 20:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm p-4" style="border-radius: 16px; border: 1px solid #f0f0f0;">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-navy">Nama Lengkap</label>
+                                <input type="text" class="form-control border-0 py-2" placeholder="Masukkan nama Anda" style="border-radius: 10px; background-color: #f8f9fb;">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-navy">Alamat Email</label>
+                                <input type="email" class="form-control border-0 py-2" placeholder="email@contoh.com" style="border-radius: 10px; background-color: #f8f9fb;">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-bold text-navy">Subjek</label>
+                                <select class="form-select border-0 py-2" style="border-radius: 10px; background-color: #f8f9fb;">
+                                    <option selected disabled>Pilih kategori pertanyaan</option>
+                                    <option>Informasi Adopsi</option>
+                                    <option>Keluhan Produk</option>
+                                    <option>Layanan Grooming</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-bold text-navy">Pesan Anda</label>
+                                <textarea class="form-control border-0 py-2" rows="4" placeholder="Tuliskan pesan Anda di sini..." style="border-radius: 10px; background-color: #f8f9fb;"></textarea>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-purple w-100 py-3 fw-bold" style="border-radius: 10px; letter-spacing: 0.5px;">Kirim Pesan Sekarang</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="pt-5 pb-4" style="background-color: #f3f0f8; border-top: 1px solid #e1d8ee;">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <a class="navbar-brand fw-bold text-purple fs-3 mb-3 d-block" href="#">
+                    <i class="fas fa-paw"></i> PetPals
+                </a>
+                <p class="text-muted small mb-4" style="line-height: 1.8;">
+                    PetPals adalah destinasi terpercaya untuk adopsi hewan dan kebutuhan perlengkapan hewan premium. Kami berkomitmen memberikan kebahagiaan bagi setiap pemilik dan hewan kesayangannya.
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="https://instagram.com" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-6">
+                <h6 class="fw-bold text-navy mb-4">Tautan Cepat</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">Home</a></li>
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">About Us</a></li>
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">Shop</a></li>
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">Services</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-2 col-6">
+                <h6 class="fw-bold text-navy mb-4">Layanan Kami</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">Adopsi Hewan</a></li>
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">Grooming</a></li>
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">Cek Kesehatan</a></li>
+                    <li class="mb-2"><a href="#" class="text-muted text-decoration-none small footer-link">Pet Hotel</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <h6 class="fw-bold text-navy mb-4">Berlangganan Info</h6>
+                <p class="text-muted small mb-3">Dapatkan promo menarik dan tips perawatan hewan setiap minggu.</p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control border-0 py-2 ps-3" placeholder="Email Anda" style="border-radius: 10px 0 0 10px; font-size: 0.9rem;">
+                    <button class="btn btn-purple px-3" style="border-radius: 0 10px 10px 0;"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-5 mb-4" style="border-color: #d1c4e9;">
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="text-muted small mb-0">&copy; 2026 <span class="fw-bold text-purple">PetPals Indonesia</span>. Dibuat dengan <i class="fas fa-heart text-danger"></i> untuk pecinta anabul.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+</html>
