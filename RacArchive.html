@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RacArchive</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+<style>
+:root{
+    --primary:#ff7b00;
+    --primary-hover:#e86f00;
+
+    --bg-main:#0d1117;
+    --bg-secondary:#111827;
+    --bg-card:#161b22;
+    --bg-glass:rgba(255,255,255,0.04);
+
+    --text-main:#ffffff;
+    --text-secondary:#9ca3af;
+    --border-color:rgba(255,255,255,0.08);
+
+    --shadow:0 10px 35px rgba(0,0,0,0.35);
+}
+
+body.light-mode{
+    --bg-main:#f5f7fb;
+    --bg-secondary:#ffffff;
+    --bg-card:#ffffff;
+    --bg-glass:rgba(255,255,255,0.7);
+
+    --text-main:#111827;
+    --text-secondary:#4b5563;
+    --border-color:rgba(0,0,0,0.08);
+
+    --shadow:0 10px 35px rgba(0,0,0,0.08);
+}
+
+/* GLOBAL */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg-main);
+    color:var(--text-main);
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    transition:all .4s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb{
+    background:var(--primary);
+    border-radius:20px;
+}
+
+/* BACKGROUND EFFECT */
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left, rgba(255,123,0,.08), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(124,58,237,.08), transparent 40%);
+    z-index:-1;
+    pointer-events: none;
+}
+
+/* NAVBAR */
+.navbar{
+    z-index:1000;
+}
+
+.nav-glass{
+    background:var(--bg-glass);
+    backdrop-filter:blur(18px);
+    border:1px solid var(--border-color);
+    border-radius:100px;
+    box-shadow:var(--shadow);
+    transition:.4s ease;
+}
+
+.navbar-brand{
+    font-weight:700;
+    font-size:1.4rem;
+    color:var(--text-main)!important;
+}
+
+.nav-link{
+    color:var(--text-secondary)!important;
+    font-size:.95rem;
+    padding:0 16px!important;
+    transition:.3s ease;
+    position:relative;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    color:var(--text-main)!important;
+}
+
+.nav-link::after{
+    content:'';
+    position:absolute;
+    bottom:-6px;
+    left:50%;
+    width:0;
+    height:2px;
+    background:var(--primary);
+    transition:.3s ease;
+    transform:translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after{
+    width:50%;
+}
+
+/* BUTTONS */
+.btn-orange{
+    background:linear-gradient(135deg,var(--primary),#ff9548);
+    color:white;
+    border:none;
+    transition:.35s ease;
+    font-weight:600;
+}
+
+.btn-orange:hover{
+    transform:translateY(-3px);
+    color:white;
+    box-shadow:0 10px 20px rgba(255,123,0,.35);
+}
+
+.btn-outline-custom{
+    border:1px solid var(--border-color);
+    color:var(--text-main);
+    transition:.3s ease;
+}
+
+.btn-outline-custom:hover{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:white;
+}
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:none;
+    background:var(--bg-card);
+    color:var(--text-main);
+    transition:.4s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+}
+
+.theme-toggle:hover{
+    transform:rotate(180deg);
+    background:var(--primary);
+    color:white;
+}
+
+/* HERO SECTION */
+.hero-section{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    position:relative;
+    padding:80px 0;
+}
+
+.social-links a{
+    color:var(--text-main);
+    font-size:1.5rem;
+    margin-right:18px;
+    transition:.3s ease;
+}
+
+.social-links a:hover{
+    color:var(--primary);
+    transform:translateY(-4px);
+}
+
+.hero-section h1{
+    line-height:1.2;
+}
+
+.hero-section p{
+    color:var(--text-secondary)!important;
+}
+
+.image-container{
+    position:relative;
+    display:inline-block;
+}
+
+.hero-img{
+    max-width:85%;
+    filter:drop-shadow(0 20px 50px rgba(0,0,0,.4));
+    animation:floatImage 4s ease-in-out infinite;
+}
+
+@keyframes floatImage{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-18px);
+    }
+}
+
+/* FLOAT BADGES */
+.badge-float{
+    position:absolute;
+    padding:10px 20px;
+    border-radius:16px;
+    font-weight:700;
+    color:white;
+    animation:floatBadge 4s ease-in-out infinite;
+    box-shadow:var(--shadow);
+}
+
+.badge-ai{
+    top:20%;
+    right:0;
+    background:linear-gradient(135deg,#ff7b00,#ff4d00);
+}
+
+.badge-pr{
+    bottom:25%;
+    right:-10px;
+    background:linear-gradient(135deg,#6d28d9,#9333ea);
+}
+
+.badge-hi{
+    top:10%;
+    left:0;
+    background:linear-gradient(135deg,#ec4899,#f43f5e);
+}
+
+@keyframes floatBadge{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+/* SECTION TITLE */
+.section-title{
+    font-size:2.7rem;
+    font-weight:800;
+    color:var(--text-main);
+}
+
+.section-subtitle{
+    color:var(--text-secondary);
+    margin-top:10px;
+    margin-bottom:50px;
+}
+
+/* ABOUT */
+.about-section{
+    background:var(--bg-secondary);
+    padding:90px 0 30px;
+    border-top:1px solid var(--border-color);
+}
+
+.about-card{
+    background:var(--bg-glass);
+    backdrop-filter:blur(15px);
+    border:1px solid var(--border-color);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+}
+
+.about-card p{
+    color:var(--text-secondary)!important;
+}
+
+.about-img{
+    position:relative;
+    z-index:2;
+    max-width:280px;
+}
+
+.skill-icon{
+    position:absolute;
+    width:60px;
+    height:60px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    z-index:3;
+    box-shadow:var(--shadow);
+    animation:floatSkill 3s ease-in-out infinite;
+}
+
+.icon-js{
+    background:#facc15;
+    color:black;
+    top:30%;
+    right:15%;
+}
+
+.icon-react{
+    background:#1e293b;
+    color:#38bdf8;
+    top:15%;
+    left:18%;
+    font-size:1.5rem;
+}
+
+.icon-tailwind{
+    background:#1e293b;
+    color:#38bdf8;
+    bottom:20%;
+    right:20%;
+    font-size:1.5rem;
+}
+
+@keyframes floatSkill{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+/* SKILLS */
+.skill-card{
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    border-radius:24px;
+    padding:25px;
+    height:100%;
+    transition:.35s ease;
+    box-shadow:var(--shadow);
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--primary);
+}
+
+.icon-box{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:rgba(255,255,255,.05);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:15px;
+    font-size:1.5rem;
+}
+
+.skill-name{
+    font-weight:600;
+    color:var(--text-main);
+}
+
+.proficiency-text{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    margin-bottom:8px;
+    color:var(--text-secondary);
+}
+
+.progress{
+    height:10px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    overflow:hidden;
+}
+
+.progress-bar{
+    border-radius:20px;
+}
+
+/* COLORS */
+.color-bootstrap{color:#7952b3;}
+.bg-bootstrap{background:#7952b3;}
+
+.color-tailwind{color:#38bdf8;}
+.bg-tailwind{background:#38bdf8;}
+
+.color-js{color:#facc15;}
+.bg-js{background:#facc15;}
+
+.color-html{color:#e34f26;}
+.bg-html{background:#e34f26;}
+
+.color-css{color:#1572b6;}
+.bg-css{background:#1572b6;}
+
+/* PROJECTS */
+.custom-card{
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    border-radius:28px;
+    padding:25px;
+    transition:.35s ease;
+    height:100%;
+    overflow:hidden;
+    position:relative;
+    box-shadow:var(--shadow);
+}
+
+.custom-card:hover{
+    transform:translateY(-8px);
+}
+
+.card-title{
+    font-weight:700;
+    color:var(--text-main);
+    margin-bottom:35px;
+}
+
+.stack-effect{
+    position:absolute;
+    top:75px;
+    left:50%;
+    transform:translateX(-50%);
+    width:85%;
+    height:120px;
+    background:rgba(255,255,255,.08);
+    border-radius:20px;
+}
+
+.stack-effect::before{
+    content:'';
+    position:absolute;
+    top:-12px;
+    left:5%;
+    width:90%;
+    height:100%;
+    background:rgba(255,255,255,.04);
+    border-radius:20px;
+}
+
+.img-container{
+    position:relative;
+    z-index:2;
+}
+
+.main-img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px 20px 20px 60px;
+}
+
+.btn-arrow{
+    position:absolute;
+    bottom:-15px;
+    right:-10px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:var(--primary);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    border:6px solid var(--bg-card);
+    transition:.3s ease;
+}
+
+.btn-arrow:hover{
+    background:var(--primary-hover);
+    color:white;
+    transform:rotate(45deg);
+}
+
+/* CONTACT */
+.contact-section{
+    padding:100px 0;
+}
+
+.contact-info-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    padding: 35px; 
+    height: 100%;
+    box-shadow: var(--shadow);
+}
+
+.contact-info-wrapper address {
+    font-style: normal;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px; 
+    transition: 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateX(5px);
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(255, 123, 0, 0.1);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.info-content h5 {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+.info-content span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    display: block;
+    line-height: 1.5;
+}
+
+.contact-form-container{
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    border-radius:25px;
+    padding:35px;
+    box-shadow:var(--shadow);
+}
+
+.custom-input{
+    background:transparent!important;
+    border:1px solid var(--border-color)!important;
+    color:var(--text-main)!important;
+    padding:14px 16px;
+    border-radius:12px;
+}
+
+.custom-input::placeholder{
+    color:var(--text-secondary);
+}
+
+.custom-input:focus{
+    box-shadow:none!important;
+    border-color:var(--primary)!important;
+}
+
+.btn-send{
+    background:linear-gradient(135deg,var(--primary),#ff9548);
+    color:white;
+    font-weight:600;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    transition:.35s ease;
+}
+
+.btn-send:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(255,123,0,.3);
+}
+
+/* FOOTER */
+.main-footer{
+    background:var(--bg-secondary);
+    padding:90px 0 30px;
+    border-top:1px solid var(--border-color);
+    margin-top: auto;
+}
+
+.footer-brand h2{
+    color:var(--primary);
+    font-weight:800;
+}
+
+.brand-dot{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:transparent;
+    border:2px solid var(--primary);
+    display:inline-block;
+    margin-right:10px;
+}
+
+.footer-text{
+    color:var(--text-secondary);
+    line-height:1.8;
+    margin-top:20px;
+    font-size:0.9rem;
+}
+
+.footer-title{
+    color:var(--text-main);
+    margin-bottom:25px;
+    position:relative;
+    font-weight:700;
+}
+
+.footer-title::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:35px;
+    height:2px;
+    background:var(--primary);
+}
+
+.footer-links{
+    padding-left:0;
+}
+
+.footer-links li{
+    list-style:none;
+    margin-bottom:12px;
+}
+
+.footer-links a{
+    text-decoration:none;
+    color:var(--text-secondary);
+    transition:.3s ease;
+    font-size:0.9rem;
+}
+
+.footer-links a:hover{
+    color:var(--primary);
+    padding-left:5px;
+}
+
+.footer-links i{
+    color:var(--primary);
+    font-size:10px;
+    margin-right:8px;
+    vertical-align: middle;
+}
+
+.social-icons-wrapper{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+}
+
+.social-box{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    color:var(--primary);
+    transition:.35s ease;
+}
+
+.social-box:hover{
+    background:var(--primary);
+    color:white;
+    transform:translateY(-4px);
+}
+
+.footer-bottom{
+    border-top:1px solid var(--border-color);
+    margin-top:50px;
+    padding-top:25px;
+    color:var(--text-secondary);
+    font-size:0.85rem;
+}
+
+.footer-bottom a{
+    color:var(--text-secondary);
+    text-decoration:none;
+}
+
+.footer-bottom a:hover{
+    color:var(--primary);
+}
+
+/* MODAL */
+.snaps-modal-content{
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    border-radius:24px;
+    color:var(--text-main);
+}
+
+.custom-close{
+    position:absolute;
+    top:-15px;
+    right:-15px;
+    background:var(--primary);
+    border-radius:50%;
+    padding:10px;
+    opacity:1;
+    transition:.3s ease;
+}
+
+.custom-close:hover{
+    transform:rotate(90deg);
+    background:white;
+}
+
+.hobby-img-wrapper{
+    overflow:hidden;
+    border-radius:16px;
+    aspect-ratio:1/1;
+    border:1px solid var(--border-color);
+}
+
+.hobby-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s ease;
+}
+
+.hobby-img-wrapper:hover .hobby-img{
+    transform:scale(1.1);
+}
+
+/* RESPONSIVE */
+@media(max-width:991px){
+
+    .nav-glass{
+        border-radius:25px;
+    }
+
+    .hero-section{
+        text-align:center;
+    }
+
+    .hero-img{
+        max-width:70%;
+    }
+
+    .section-title{
+        font-size:2.2rem;
+    }
+}
+
+@media(max-width:768px){
+
+    .hero-section{
+        padding-top:120px;
+    }
+
+    .hero-img{
+        max-width:90%;
+    }
+    
+    .contact-info-wrapper {
+        margin-bottom: 30px;
+    }
+
+    .about-img{
+        max-width:240px;
+    }
+}
+</style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark pt-4 fixed-top">
+        <div class="container nav-glass px-4 py-2">
+            <a class="navbar-brand" href="#">RacArchive</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="themeIcon" class="fas fa-moon"></i>
+                </button>
+
+                <button class="btn btn-orange rounded-pill px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#snapsModal">
+                    Snaps
+                </button>
+            </div>
+        </div>
+    </nav>
+
+  </br>
+  </br>
+  </br>
+  </br>
+
+    <!-- HERO SECTION -->
+    <header class="hero-section" id="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-center text-lg-start">
+                    
+                    <nav class="social-links mb-4" aria-label="Social Media Links">
+                        <a href="https://github.com/rachelaulia7j-ai" target="_blank" aria-label="Github"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/rchliaa" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/rcchell.a" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@raachell.a" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </nav>
+
+                    <h1 class="display-3 fw-bold mb-3">
+                        Hi, I'm <span>Rachel A</span>
+                    </h1>
+
+                    <p class="fs-5 mb-5 pe-lg-5">
+                        A budding web developer passionate about interface design and artificial intelligence.
+                        Focused on creating clean, functional, and easy-to-use digital experiences.
+                    </p>
+
+                    <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start gap-3">
+                        <a href="cv.html" class="btn btn-orange btn-lg rounded-pill px-5">
+                            <i class="fas fa-download me-2"></i> Resume
+                        </a>
+                        <button class="btn btn-outline-custom btn-lg rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#contactModal">
+                            <i class="far fa-envelope me-2"></i> Contact Me
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mt-5 mt-lg-0 text-center position-relative">
+                    <figure class="image-container">
+                        <img src="11zon_cropped.png" alt="3D Character Illustration" class="img-fluid hero-img">
+                        
+                        <span class="badge-float badge-ai">AI</span>
+                        <span class="badge-float badge-pr">PR</span>
+                        <span class="badge-float badge-hi">Hi 👋</span>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <main class="about-section py-5" id="about">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 position-relative text-center mb-5 mb-lg-0">
+                <div class="star-background">
+                </div>
+                <img src="11zon_cropped.png" alt="About Character" class="img-fluid about-img">
+                
+                <div class="skill-icon icon-js">JS</div>
+                <div class="skill-icon icon-react"><i class="fab fa-react"></i></div>
+                <div class="skill-icon icon-tailwind"><i class="fab fa-css3-alt"></i></div>
+            </div>
+
+            <div class="col-lg-6 text-white ps-lg-5">
+                <h1 class="section-title"><span style="color: #f97316;">About Me</span></h1>
+                <div class="about-card p-4 mb-4">
+                    <p class="text-secondary lh-lg" style="text-align: justify;">
+                        Hello, my name is Rachel Aulia Putri Kumalasari. I am a student of Software Engineering at a vocational high school. 
+                        I am interested in technology, programming, and website development. I like learning new things, especially about computers 
+                        and coding. In my free time, I enjoy listening to music and watching videos. Besides that, I also have a hobby of hiking and exploring
+                        nature because I love seeing how beautiful the universe is.
+                    </p>
+                </div>
+
+                <div class="row text-center text-lg-start mt-4">
+                    <div class="col-4">
+                        <h3 class="fw-bold mb-0">5+</h3>
+                        <p class="text-secondary small">Education</p>
+                    </div>
+                    <div class="col-4">
+                        <h3 class="fw-bold mb-0">10+</h3>
+                        <p class="text-secondary small">Years Experience</p>
+                    </div>
+                    <div class="col-4">
+                        <h3 class="fw-bold mb-0">100+</h3>
+                        <p class="text-secondary small">Projects Completed</p>
+                    </div>
+                </div>
+               <a href="HAL 2 PORTOFOLIO.html" class="btn btn-orange rounded-pill px-5 py-2 mt-4 shadow">Experience</a>
+            </div>
+        </div>
+    </div>
+</main>
+    
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-5">
+        <div class="container text-center">
+            <header>
+                <h1 class="section-title">
+                    My <span style="color: #ff7b00;">Skills</span>
+                </h1>
+                <p class="section-subtitle">
+                    Technologies and tools I work with to create amazing web experiences
+                </p>
+            </header>
+
+            <ul class="row g-4 justify-content-center mb-4 list-unstyled">
+                <li class="col-lg-4 col-md-6">
+                    <article class="skill-card">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box"><i class="bi bi-bootstrap-fill color-bootstrap"></i></div>
+                            <h5 class="skill-name">Bootstrap</h5>
+                        </div>
+                        <div class="proficiency-text">
+                            <span>Proficiency</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-bootstrap" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="col-lg-4 col-md-6">
+                    <article class="skill-card text-start">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box"><i class="bi bi-wind color-tailwind"></i></div>
+                            <h5 class="skill-name">Tailwind</h5>
+                        </div>
+                        <div class="proficiency-text">
+                            <span>Proficiency</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-tailwind" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="col-lg-4 col-md-6">
+                    <article class="skill-card text-start">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box"><i class="bi bi-filetype-js color-js"></i></div>
+                            <h5 class="skill-name">JavaScript</h5>
+                        </div>
+                        <div class="proficiency-text">
+                            <span>Proficiency</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-js" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+
+            <ul class="row g-4 justify-content-center list-unstyled">
+                <li class="col-lg-4 col-md-6">
+                    <article class="skill-card text-start">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box"><i class="bi bi-filetype-html color-html"></i></div>
+                            <h5 class="skill-name">HTML5</h5>
+                        </div>
+                        <div class="proficiency-text">
+                            <span>Proficiency</span>
+                            <span>98%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-html" role="progressbar" style="width: 98%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="col-lg-4 col-md-6">
+                    <article class="skill-card text-start">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box"><i class="bi bi-filetype-css color-css"></i></div>
+                            <h5 class="skill-name">CSS3</h5>
+                        </div>
+                        <div class="proficiency-text">
+                            <span>Proficiency</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-css" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <header class="text-center">
+                <h1 class="section-title">
+                    My <span style="color: #ff7b00;">Projects</span>
+                </h1>
+                <p class="section-subtitle">
+                    A showcase of my recent work
+                </p>
+            </header>
+
+            <ul class="row g-4 justify-content-center list-unstyled">
+                <li class="col-lg-4 col-md-6">
+                    <article class="custom-card">
+                        <h5 class="card-title">Recycling Web</h5>
+                        <div class="stack-effect"></div>
+                        <figure class="img-container">
+                            <img src="ss5.png" class="main-img" alt="Recycling Web UI UX" loading="lazy">
+                            <a href="https://kolaboratif11.vercel.app/" target="_blank" class="btn-arrow" aria-label="View Recycling Web Project">
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="col-lg-4 col-md-6">
+                    <article class="custom-card">
+                        <h5 class="card-title">Digital School Web</h5>
+                        <div class="stack-effect"></div>
+                        <figure class="img-container">
+                            <img src="ss4.png" class="main-img" alt="Digital School Web Design" loading="lazy">
+                            <a href="TUGAS 2 BOOTSTRAP.html" target="_blank" class="btn-arrow" aria-label="View Digital School Web Project">
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="col-lg-4 col-md-6">
+                    <article class="custom-card">
+                        <h5 class="card-title">Environs Web</h5>
+                        <div class="stack-effect"></div>
+                        <figure class="img-container">
+                            <img src="ss3.png" class="main-img" alt="Environs Web Development" loading="lazy">
+                            <a href="TUGAS 3 BOOTSTRAPS.html" target="_blank" class="btn-arrow" aria-label="View Environs Web Project">
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="col-lg-4 col-md-6">
+                    <article class="custom-card">
+                        <h5 class="card-title">Landing Page</h5>
+                        <div class="stack-effect"></div>
+                        <figure class="img-container">
+                            <img src="ss2.png" class="main-img" alt="Landing Page Design" loading="lazy">
+                            <a href="TUGAS 4 LANDING PAGE.html" target="_blank" class="btn-arrow" aria-label="View Landing Page Project">
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="col-lg-4 col-md-6">
+                    <article class="custom-card">
+                        <h5 class="card-title">Pet Care &amp; Supplies Web</h5>
+                        <div class="stack-effect"></div>
+                        <figure class="img-container">
+                            <img src="ss1.png" class="main-img" alt="Pet Care Web" loading="lazy">
+                            <a href="https://rachelaulia7j-ai.github.io/TUGAS-5-BOOTSTRAP/" target="_blank" class="btn-arrow" aria-label="View Pet Care Web Project">
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </figure>
+                    </article>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <header class="text-center mb-5">
+                <h2 class="section-title">
+                    Get In <span style="color: #ff7b00;">Touch</span>
+                </h2>
+                <p class="section-subtitle">
+                    Feel free to reach out for collaborations or just a friendly hello
+                </p>
+            </header>
+
+            <div class="row align-items-center">
+                
+                <div class="col-lg-4 col-md-5 mb-5 mb-lg-0">
+                    <div class="contact-info-wrapper">
+                        <address class="contact-details">
+                            <!-- Phone -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Phone</h5>
+                                    <span>+62 877-4268-5522</span>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Email</h5>
+                                    <span>rachelauliaaa888@gmail.com</span>
+                                </div>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Location</h5>
+                                    <span>JL. Dukuh Banjari, Tengaran, Jawa Tengah</span>
+                                </div>
+                            </div>
+
+                            <!-- Website -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Website</h5>
+                                    <span>RacArchive.com</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Hours -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Working Hours</h5>
+                                    <span>Mon - Fri / 8am-10pm</span>
+                                </div>
+                            </div>
+                        </address>
+                    </div>
+                </div>
+
+                <div class="col-lg-8 col-md-7">
+                    <div class="contact-form-container">
+                        <form onsubmit="event.preventDefault(); showSubmitMessage();" autocomplete="on">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control custom-input" placeholder="First Name" required autocomplete="name">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control custom-input" placeholder="Last Name" required autocomplete="family-name">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control custom-input" placeholder="Email Address" required autocomplete="email">
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control custom-input" placeholder="Phone Number" autocomplete="tel">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control custom-input" rows="4" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-send w-100">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 mb-4">
+                    <div class="footer-brand">
+                        <h2><span class="brand-dot"></span>RacArchive</h2>
+                    </div>
+                    <p class="footer-text mt-3">
+                        A digital archive space dedicated to documenting creative journeys,
+                        design explorations, and the development of innovative technological solutions.
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-title">Navigation</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#hero"><i class="fa-solid fa-chevron-right me-2"></i> Home</a></li>
+                        <li><a href="#about"><i class="fa-solid fa-chevron-right me-2"></i> About</a></li>
+                        <li><a href="#skills"><i class="fa-solid fa-chevron-right me-2"></i> Skills</a></li>
+                        <li><a href="#projects"><i class="fa-solid fa-chevron-right me-2"></i> Projects</a></li>
+                        <li><a href="#contact"><i class="fa-solid fa-chevron-right me-2"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-5 col-md-6 mb-4">
+                    <h5 class="footer-title">Connect With Me</h5>
+                    <p class="footer-text">
+                        Follow my latest developments and projects through the following social media.
+                    </p>
+                    <div class="social-icons-wrapper">
+                        <a href="https://github.com/rachelaulia7j-ai" class="social-box"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/rchliaa" class="social-box"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/rcchell.a" class="social-box"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@raachell.a" class="social-box"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="mb-0">
+                    Copyright © 2024 Rachel By RacArchive. All Rights Reserved.
+                </p>
+                <div class="mt-3 mt-md-0">
+                    <a href="#">Terms &amp; Service</a>
+                    <span class="mx-2">|</span>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- SNAPS MODAL -->
+<div class="modal fade" id="snapsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content snaps-modal-content">
+            
+            <div class="modal-header border-0 position-relative p-0">
+                <button type="button" class="btn-close btn-close-white custom-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 p-md-5">
+                <h4 class="text-center fw-bold mb-4">
+                    My <span style="color:var(--primary)">Hobby</span>
+                </h4>
+
+                <div class="row g-3">
+                    <div class="col-6 col-md-4">
+                        <div class="hobby-img-wrapper">
+                            <img src="hb1.jpg" class="hobby-img" alt="Hobby 1">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <div class="hobby-img-wrapper">
+                            <img src="hb2.jpg" class="hobby-img" alt="Hobby 2">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <div class="hobby-img-wrapper">
+                            <img src="hb3.jpg" class="hobby-img" alt="Hobby 3">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <div class="hobby-img-wrapper">
+                            <img src="hb4.jpg" class="hobby-img" alt="Hobby 4">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <div class="hobby-img-wrapper">
+                            <img src="hb5.jpg" class="hobby-img" alt="Hobby 5">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <div class="hobby-img-wrapper">
+                            <img src="hb6.jpg" class="hobby-img" alt="Hobby 6">
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center mt-4" style="color:var(--text-secondary)">
+                    A curated selection of things I do when not coding.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content snaps-modal-content">
+            
+            <!-- Modal Header -->
+            <div class="modal-header border-0">
+                <h5 class="modal-title">Contact Me</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form action="mailto:rachelauliaaa888@gmail.com" method="post" enctype="text/plain">
+                    
+                    <div class="mb-3">
+                        <label for="contactName" class="form-label">Full Name</label>
+                        <input type="text" id="contactName" class="form-control custom-input" placeholder="Masukkan nama Anda" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contactEmail" class="form-label">Email Address</label>
+                        <input type="email" id="contactEmail" class="form-control custom-input" placeholder="nama@email.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contactMessage" class="form-label">Message</label>
+                        <textarea id="contactMessage" class="form-control custom-input" rows="4" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-orange rounded-pill">
+                            Send Message
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* =========================
+   DARK & LIGHT MODE SYSTEM
+========================= */
+
+const body = document.body;
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+
+if(localStorage.getItem('theme') === 'light'){
+    body.classList.add('light-mode');
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+}
+
+themeToggle.addEventListener('click', () => {
+
+    body.classList.toggle('light-mode');
+
+    if(body.classList.contains('light-mode')){
+
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+
+        localStorage.setItem('theme','light');
+
+    }else{
+
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+
+        localStorage.setItem('theme','dark');
+    }
+
+});
+
+function showSubmitMessage() {
+    alert("Thank you for your message! This is a demo form.");
+}
+</script>
+
+</body>
+</html>
