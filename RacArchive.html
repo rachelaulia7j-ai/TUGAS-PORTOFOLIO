@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
+    
 <style>
-
 :root{
     --primary:#ff7b00;
     --primary-hover:#e86f00;
@@ -28,7 +26,6 @@
     --shadow:0 10px 35px rgba(0,0,0,0.35);
 }
 
-/* LIGHT MODE VARIABLES */
 body.light-mode{
     --bg-main:#f5f7fb;
     --bg-secondary:#ffffff;
@@ -59,6 +56,9 @@ body{
     font-family:'Poppins',sans-serif;
     overflow-x:hidden;
     transition:all .4s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* SCROLLBAR */
@@ -81,9 +81,10 @@ body::before{
     position:fixed;
     inset:0;
     background:
-    radial-gradient(circle at top left, rgba(255,123,0,.15), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(124,58,237,.12), transparent 30%);
+    radial-gradient(circle at top left, rgba(255,123,0,.08), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(124,58,237,.08), transparent 40%);
     z-index:-1;
+    pointer-events: none;
 }
 
 /* NAVBAR */
@@ -163,7 +164,7 @@ body::before{
     color:white;
 }
 
-/* THEME TOGGLE */
+/* THEME TOGGLE BUTTON */
 .theme-toggle{
     width:45px;
     height:45px;
@@ -509,10 +510,56 @@ body::before{
     padding:100px 0;
 }
 
-.contact-img{
-    max-width:80%;
-    border-radius:25px;
-    filter:drop-shadow(0 20px 30px rgba(0,0,0,.35));
+.contact-info-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    padding: 35px; 
+    height: 100%;
+    box-shadow: var(--shadow);
+}
+
+.contact-info-wrapper address {
+    font-style: normal;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px; 
+    transition: 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateX(5px);
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(255, 123, 0, 0.1);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.info-content h5 {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+.info-content span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    display: block;
+    line-height: 1.5;
 }
 
 .contact-form-container{
@@ -560,6 +607,7 @@ body::before{
     background:var(--bg-secondary);
     padding:90px 0 30px;
     border-top:1px solid var(--border-color);
+    margin-top: auto;
 }
 
 .footer-brand h2{
@@ -581,6 +629,7 @@ body::before{
     color:var(--text-secondary);
     line-height:1.8;
     margin-top:20px;
+    font-size:0.9rem;
 }
 
 .footer-title{
@@ -613,6 +662,7 @@ body::before{
     text-decoration:none;
     color:var(--text-secondary);
     transition:.3s ease;
+    font-size:0.9rem;
 }
 
 .footer-links a:hover{
@@ -622,20 +672,9 @@ body::before{
 
 .footer-links i{
     color:var(--primary);
-    font-size:12px;
+    font-size:10px;
     margin-right:8px;
-}
-
-.contact-info p{
-    color:var(--text-secondary);
-    display:flex;
-    align-items:center;
-    margin-bottom:15px;
-}
-
-.contact-info i{
-    color:var(--primary);
-    margin-right:12px;
+    vertical-align: middle;
 }
 
 .social-icons-wrapper{
@@ -669,6 +708,7 @@ body::before{
     margin-top:50px;
     padding-top:25px;
     color:var(--text-secondary);
+    font-size:0.85rem;
 }
 
 .footer-bottom a{
@@ -751,9 +791,9 @@ body::before{
     .hero-img{
         max-width:90%;
     }
-
-    .contact-img{
-        max-width:100%;
+    
+    .contact-info-wrapper {
+        margin-bottom: 30px;
     }
 
     .about-img{
@@ -761,10 +801,9 @@ body::before{
     }
 }
 </style>
-<head>
+</head>
 <body>
 
-<main id="content">
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark pt-4 fixed-top">
         <div class="container nav-glass px-4 py-2">
@@ -796,12 +835,13 @@ body::before{
         </div>
     </nav>
 
-</br>
-</br>
-</br>
+  </br>
+  </br>
+  </br>
+  </br>
 
     <!-- HERO SECTION -->
-    <section class="hero-section" id="hero">
+    <header class="hero-section" id="hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 text-center text-lg-start">
@@ -843,10 +883,10 @@ body::before{
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- ABOUT SECTION -->
-    <section class="about-section py-5" id="about">
+    <main class="about-section py-5" id="about">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 position-relative text-center mb-5 mb-lg-0">
@@ -862,8 +902,11 @@ body::before{
             <div class="col-lg-6 text-white ps-lg-5">
                 <h1 class="section-title"><span style="color: #f97316;">About Me</span></h1>
                 <div class="about-card p-4 mb-4">
-                    <p class="text-secondary lh-lg">
-                        Hello, my name is Rachel Aulia Putri Kumalasari. I am a student of Software Engineering at a vocational high school. I am interested in technology, programming, and website development. I like learning new things, especially about computers and coding. In my free time, I enjoy listening to music and watching videos. Besides that, I also have a hobby of hiking and exploring nature because I love seeing how beautiful the universe is.
+                    <p class="text-secondary lh-lg" style="text-align: justify;">
+                        Hello, my name is Rachel Aulia Putri Kumalasari. I am a student of Software Engineering at a vocational high school. 
+                        I am interested in technology, programming, and website development. I like learning new things, especially about computers 
+                        and coding. In my free time, I enjoy listening to music and watching videos. Besides that, I also have a hobby of hiking and exploring
+                        nature because I love seeing how beautiful the universe is.
                     </p>
                 </div>
 
@@ -885,13 +928,15 @@ body::before{
             </div>
         </div>
     </div>
-</section>
+</main>
     
     <!-- SKILLS SECTION -->
     <section id="skills" class="py-5">
         <div class="container text-center">
             <header>
-                <h1 class="section-title">My <span style="color: #ff7b00;">Skills</span></h1>
+                <h1 class="section-title">
+                    My <span style="color: #ff7b00;">Skills</span>
+                </h1>
                 <p class="section-subtitle">
                     Technologies and tools I work with to create amazing web experiences
                 </p>
@@ -987,7 +1032,9 @@ body::before{
     <section id="projects" class="py-5">
         <div class="container">
             <header class="text-center">
-                <h1 class="section-title">My <span style="color: #ff7b00;">Projects</span></h1>
+                <h1 class="section-title">
+                    My <span style="color: #ff7b00;">Projects</span>
+                </h1>
                 <p class="section-subtitle">
                     A showcase of my recent work
                 </p>
@@ -1013,7 +1060,7 @@ body::before{
                         <div class="stack-effect"></div>
                         <figure class="img-container">
                             <img src="ss4.png" class="main-img" alt="Digital School Web Design" loading="lazy">
-                            <a href="TUGAS 2 BOOTSTRAP.html" class="btn-arrow" aria-label="View Digital School Web Project">
+                            <a href="TUGAS 2 BOOTSTRAP.html" target="_blank" class="btn-arrow" aria-label="View Digital School Web Project">
                                 <i class="bi bi-arrow-up-right"></i>
                             </a>
                         </figure>
@@ -1026,7 +1073,7 @@ body::before{
                         <div class="stack-effect"></div>
                         <figure class="img-container">
                             <img src="ss3.png" class="main-img" alt="Environs Web Development" loading="lazy">
-                            <a href="TUGAS 3 BOOTSTRAPS.html" class="btn-arrow" aria-label="View Environs Web Project">
+                            <a href="TUGAS 3 BOOTSTRAPS.html" target="_blank" class="btn-arrow" aria-label="View Environs Web Project">
                                 <i class="bi bi-arrow-up-right"></i>
                             </a>
                         </figure>
@@ -1039,7 +1086,7 @@ body::before{
                         <div class="stack-effect"></div>
                         <figure class="img-container">
                             <img src="ss2.png" class="main-img" alt="Landing Page Design" loading="lazy">
-                            <a href="TUGAS 4 LANDING PAGE.html" class="btn-arrow" aria-label="View Landing Page Project">
+                            <a href="TUGAS 4 LANDING PAGE.html" target="_blank" class="btn-arrow" aria-label="View Landing Page Project">
                                 <i class="bi bi-arrow-up-right"></i>
                             </a>
                         </figure>
@@ -1052,7 +1099,7 @@ body::before{
                         <div class="stack-effect"></div>
                         <figure class="img-container">
                             <img src="ss1.png" class="main-img" alt="Pet Care Web" loading="lazy">
-                            <a href="TUGAS 5 BOOTSTRAP.html" class="btn-arrow" aria-label="View Pet Care Web Project">
+                            <a href="https://rachelaulia7j-ai.github.io/TUGAS-5-BOOTSTRAP/" target="_blank" class="btn-arrow" aria-label="View Pet Care Web Project">
                                 <i class="bi bi-arrow-up-right"></i>
                             </a>
                         </figure>
@@ -1066,35 +1113,93 @@ body::before{
     <section class="contact-section" id="contact">
         <div class="container">
             <header class="text-center mb-5">
-                <h2 class="section-title">Get In <span style="color: #ff7b00;">Touch</span></h2>
+                <h2 class="section-title">
+                    Get In <span style="color: #ff7b00;">Touch</span>
+                </h2>
                 <p class="section-subtitle">
-                    Let's discuss your project
+                    Feel free to reach out for collaborations or just a friendly hello
                 </p>
             </header>
 
             <div class="row align-items-center">
-                <div class="col-lg-5 text-center mb-5 mb-lg-0">
-                    <figure>
-                        <img src="https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436185.jpg" alt="Contact Illustration" class="img-fluid contact-img" loading="lazy">
-                    </figure>
+                
+                <div class="col-lg-4 col-md-5 mb-5 mb-lg-0">
+                    <div class="contact-info-wrapper">
+                        <address class="contact-details">
+                            <!-- Phone -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Phone</h5>
+                                    <span>+62 877-4268-5522</span>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Email</h5>
+                                    <span>rachelauliaaa888@gmail.com</span>
+                                </div>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Location</h5>
+                                    <span>JL. Dukuh Banjari, Tengaran, Jawa Tengah</span>
+                                </div>
+                            </div>
+
+                            <!-- Website -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Website</h5>
+                                    <span>RacArchive.com</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Hours -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h5>Working Hours</h5>
+                                    <span>Mon - Fri / 8am-10pm</span>
+                                </div>
+                            </div>
+                        </address>
+                    </div>
                 </div>
 
-                <div class="col-lg-7">
+                <div class="col-lg-8 col-md-7">
                     <div class="contact-form-container">
-                        <form onsubmit="event.preventDefault(); showSubmitMessage();">
+                        <form onsubmit="event.preventDefault(); showSubmitMessage();" autocomplete="on">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control custom-input" placeholder="First Name" required>
+                                    <input type="text" class="form-control custom-input" placeholder="First Name" required autocomplete="name">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control custom-input" placeholder="Last Name" required>
+                                    <input type="text" class="form-control custom-input" placeholder="Last Name" required autocomplete="family-name">
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control custom-input" placeholder="Email Address" required>
+                                <input type="email" class="form-control custom-input" placeholder="Email Address" required autocomplete="email">
                             </div>
                             <div class="mb-3">
-                                <input type="tel" class="form-control custom-input" placeholder="Phone Number">
+                                <input type="tel" class="form-control custom-input" placeholder="Phone Number" autocomplete="tel">
                             </div>
                             <div class="mb-3">
                                 <textarea class="form-control custom-input" rows="4" placeholder="Your Message" required></textarea>
@@ -1114,7 +1219,7 @@ body::before{
 <footer class="main-footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-5 col-md-6 mb-4">
                     <div class="footer-brand">
                         <h2><span class="brand-dot"></span>RacArchive</h2>
                     </div>
@@ -1124,7 +1229,7 @@ body::before{
                     </p>
                 </div>
 
-                <div class="col-lg-2 col-md-6 mb-4 offset-lg-1">
+                <div class="col-lg-2 col-md-6 mb-4">
                     <h5 class="footer-title">Navigation</h5>
                     <ul class="footer-links list-unstyled">
                         <li><a href="#hero"><i class="fa-solid fa-chevron-right me-2"></i> Home</a></li>
@@ -1135,18 +1240,7 @@ body::before{
                     </ul>
                 </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 class="footer-title">Contact</h5>
-                    <div class="contact-info">
-                        <p><i class="fa-solid fa-phone"></i> +62 877-4268-5522</p>
-                        <p><i class="fa-solid fa-envelope"></i> rachelauliaaa888@gmail.com</p>
-                        <p><i class="fa-solid fa-location-dot"></i> JL. Dukuh Banjari, Tengaran, Jawa Tengah</p>
-                        <p><i class="fa-solid fa-globe"></i> RacArchive.com</p>
-                        <p><i class="fa-solid fa-clock"></i> Mon - Fri / 8am-10pm</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-5 col-md-6 mb-4">
                     <h5 class="footer-title">Connect With Me</h5>
                     <p class="footer-text">
                         Follow my latest developments and projects through the following social media.
@@ -1178,12 +1272,9 @@ body::before{
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content snaps-modal-content">
             
-            <!-- Modal Header -->
             <div class="modal-header border-0 position-relative p-0">
                 <button type="button" class="btn-close btn-close-white custom-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-            <!-- Modal Body -->
             <div class="modal-body p-4 p-md-5">
                 <h4 class="text-center fw-bold mb-4">
                     My <span style="color:var(--primary)">Hobby</span>
@@ -1248,7 +1339,7 @@ body::before{
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <form action="mailto:emailanda@gmail.com" method="post" enctype="text/plain">
+                <form action="mailto:rachelauliaaa888@gmail.com" method="post" enctype="text/plain">
                     
                     <div class="mb-3">
                         <label for="contactName" class="form-label">Full Name</label>
@@ -1289,14 +1380,12 @@ const body = document.body;
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 
-/* Load Theme */
 if(localStorage.getItem('theme') === 'light'){
     body.classList.add('light-mode');
     themeIcon.classList.remove('fa-moon');
     themeIcon.classList.add('fa-sun');
 }
 
-/* Toggle Theme */
 themeToggle.addEventListener('click', () => {
 
     body.classList.toggle('light-mode');
@@ -1317,8 +1406,11 @@ themeToggle.addEventListener('click', () => {
     }
 
 });
-</script>
 
+function showSubmitMessage() {
+    alert("Thank you for your message! This is a demo form.");
+}
+</script>
 
 </body>
 </html>
